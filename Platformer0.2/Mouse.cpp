@@ -20,7 +20,7 @@ Mouse::Mouse(SDL_Texture* mouse_t)
 
 Mouse::~Mouse()
 {
-	delete mouse_t;
+	SDL_DestroyTexture(mouse_t);
 }
 
 

@@ -1,0 +1,15 @@
+Mechanics:
+	challenge - to get to the end of the level need to be able to jump a certain height/length
+	
+	1) Chicken leg - +0.5 blocks to jump height/length
+	2) Bone - +~2 to jump length (and speed)
+	3) Cheese - +1 life
+	4) Hoover - has to be killed by jumping on it, doesn't give you anything, kills on contact
+	
+Controlls:
+	A,D - move
+	W - jump
+	ESC - pause menu
+
+	R - restart level
+	G - noGravity mode

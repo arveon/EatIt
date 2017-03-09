@@ -52,21 +52,30 @@ public:
 	void setActive() { isActive = true; }
 	//methods required to properly move between rooms
 	void resetPortal() { inPortal = GameConstants::Portal_None; }
-	GameConstants::ObjectType getPortal() { return inPortal; }
-	GameConstants::ObjectType getCurrentRoom() { return currentRoom; }
+
 	void setCurrentRoom(GameConstants::ObjectType newCurRoom) { currentRoom = newCurRoom; }
 	void resetBetweenLevels();
 	bool canEat(EnemyConstants::EnemyType enemyType);
 	void feed(EnemyConstants::EnemyType enemyType, int enemyID);
 	void takeDamage(bool needsRestart);
 
-	PlayerConstants::PLAYER_STATE getState() { return curState; }
-	PlayerConstants::PLAYER_STATE getPrevState() { return prevState; }
+	
 	void finished() { finish = true; }
 	bool isFinished() { return finish; }
 
 	int killedEnemy;
 	bool tookDamage;
+
+	GameConstants::ObjectType getPortal() { return inPortal; }
+	GameConstants::ObjectType getCurrentRoom() { return currentRoom; }
+	PlayerConstants::PLAYER_STATE getState() { return curState; }
+	PlayerConstants::PLAYER_STATE getPrevState() { return prevState; }
+	int getLives() { return lives; }
+
+	void setLives(int lc) { lives = lc; }
+
+	//float getImpulse() { return jumpImpulse; }
+	//float getLengthMultiplier() { return jumpXPenaltyMultiplier; }
 };
 
 #endif

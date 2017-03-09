@@ -1,0 +1,32 @@
+FOR MAPS:
+Blocks:
+	0 - empty
+	1 - grass block
+	2 - dirt
+	3 - stone
+	4 - brick
+	5 - mossy_stone
+	6 - glass
+	7 - light wood
+	8 - dark wood
+	
+	s - spikes
+	
+	
+Decorations:
+	g - grass
+	f - flowers
+	i - ivy
+	v - vase
+	p - pot
+	
+Creatures:
+	n - bone
+	c - cheese
+	l - chicken leg
+	r - hoover
+	
+Portals:
+	a,b,c,d - portals that lead to different rooms on the level
+	e - portal that leads to next level
+	k - tile that finishes the game

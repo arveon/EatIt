@@ -1,0 +1,23 @@
+﻿  Button.cpp
+  Camera.cpp
+  Enemy.cpp
+  Game.cpp
+  GameObject.cpp
+  Indicators.cpp
+  Main.cpp
+  Menu.cpp
+Menu.cpp(28): warning C4018: '<': signed/unsigned mismatch
+Menu.cpp(39): warning C4244: '/=': conversion from 'const float' to 'int', possible loss of data
+Menu.cpp(40): warning C4244: '/=': conversion from 'const float' to 'int', possible loss of data
+Menu.cpp(44): warning C4018: '<': signed/unsigned mismatch
+  Mouse.cpp
+  Player.cpp
+  SoundManager.cpp
+  TileMap.cpp
+  Generating code
+  1055 of 1058 functions (99.7%) were compiled, the rest were copied from previous compilation.
+    340 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
+  Finished generating code
+  Platformer0.2.vcxproj -> C:\Users\arveon\Desktop\temp\PlatformerGame\Release\Platformer0.2.exe
+  Platformer0.2.vcxproj -> C:\Users\arveon\Desktop\temp\PlatformerGame\Release\Platformer0.2.pdb (Full PDB)

@@ -17,6 +17,7 @@
 #include "Enemy.h"
 #include "Menu.h"
 #include "SoundManager.h"
+#include "Indicators.h"
 
 class Game
 {
@@ -29,6 +30,7 @@ private:
 	MenuConstants::MenuType menu_type;
 	Menu* menu;
 	SoundManager* sound_manager = nullptr;
+	Indicators* UI;
 
 	//general textures (bg, player, enemy etc)
 	SDL_Texture* main_menu_bg = nullptr;
@@ -62,7 +64,7 @@ private:
 	SDL_Texture* cheese_t;
 	SDL_Texture* hoover_t;
 
-	
+	SDL_Texture* livesIndicator_t;	
 	
 	std::vector<SDL_Texture*>* button_t;
 	
@@ -107,7 +109,7 @@ private:
 	void removeGameObjects();
 	SDL_Texture* loadTexture(std::string filepath, SDL_Renderer* renderer);
 	void LoadNewLevel(GameConstants::ObjectType portalEntered);
-	void restart();
+	void restart(std::string);
 	void stop();
 
 	void capFramerate(int* elapsedTime);

@@ -96,7 +96,7 @@ void Game::Update()
 	{
 		if (player->isFinished())
 		{
-			restart();
+			restart("");
 			toMainMenu();
 			game_state = SystemConstants::Menu;
 			menu->setType(MenuConstants::MainMenu);
@@ -105,7 +105,7 @@ void Game::Update()
 
 		//if player is dead, restart the game
 		if (!player->isObjectActive())
-			restart();
+			restart("");
 
 		//add the enemy killed to the list of killed enemies
 		if (player->killedEnemy != 0)
@@ -158,7 +158,7 @@ void Game::Update()
 				currentRoom = 0;
 				level = SystemConstants::LEVEL_0;
 				curLevel++;
-				restart();
+				restart("keep");
 				//player->resetBetweenLevels();
 				//std::cout << "afterPlayerReset curRoom: " << player->getCurrentRoom() << std::endl;
 				break;
@@ -187,7 +187,7 @@ void Game::Update()
 			std::stringstream path;
 			path << SystemConstants::MAPS_FOLDER << curLevel << "/" << SystemConstants::LEVEL_0;
 			currentMap = path.str();
-			restart();
+			restart("");
 		}
 		else if(!keyboardState[SDL_SCANCODE_R])
 			afterRestart = false;
@@ -255,6 +255,7 @@ void Game::Update()
 			sound_manager->damageTaken();
 			player->tookDamage = false;
 		}
+		UI->Update(player->getLives());
 	}
 }
 	
@@ -292,12 +293,15 @@ void Game::Draw()
 	player->Draw(renderer, camera->getCameraRect());
 
 	map->Draw(renderer, camera->getCameraRect());
+	UI->Draw(renderer);
 
 	//is menu is pause menu, draw menu in a small portion of the window
 	if (game_state == SystemConstants::Menu && menu->getType() == MenuConstants::PauseMenu)
 	{
 		menu->Draw(renderer);
 	}
+	
+	
 
 	SDL_RenderPresent(renderer);
 }
@@ -382,7 +386,7 @@ void Game::LoadNewLevel(GameConstants::ObjectType portalEntered)
 }
 
 //game reset logic (may also be used to load other levels, as it also reloads the level)
-void Game::restart()
+void Game::restart(std::string mode)
 {
 	std::stringstream newmap;
 	newmap << "maps/" << curLevel << "/" << SystemConstants::LEVEL_0;
@@ -405,11 +409,15 @@ void Game::restart()
 		while (enemiesKilledOnLevel[i].size() > 0)
 			enemiesKilledOnLevel[i].pop_back();
 
+	//required for keeping livecount between levels
+	int lives = player->getLives();
+
 	delete player;
 	//logic for resetting everything
 	removeGameObjects();
 	initMapObjects();
 	initPlayer();
+	if(mode == "keep")player->setLives(lives);//sets the livecount to what it was on previous level
 	initEntities();
 }
 
@@ -496,6 +504,7 @@ Game::~Game()
 	delete button_t;
 	delete bg_textures;
 	delete menu;
+	delete UI;
 
 	delete sound_manager;
 	//removeGameObjects();
@@ -521,6 +530,7 @@ void Game::initSystem()
 	initSDL();//initialise SDL functions
 	loadTextures();//load necessary textures
 	menu = new Menu(main_menu_bg, pause_menu_bg, MenuConstants::MainMenu, button_t, mouse_t);
+	UI = new Indicators(livesIndicator_t);
 	sound_manager = new SoundManager();
 	sound_manager->loadSounds();
 }
@@ -629,6 +639,9 @@ void Game::loadTextures()
 
 	//pointer
 	mouse_t = loadTexture("graphics/mouse.png", renderer);
+
+	//ui elements
+	livesIndicator_t = loadTexture("graphics/heart.png", renderer);
 }
 
 //loads a texture and returns a pointer to it
